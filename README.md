@@ -23,3 +23,16 @@ Los datos que se generaron se encuentran en db/seeds.rb, ademas al correr el com
 
 Como vemos, si corremos rails server, nuestra aplicacion ya se ejecuta localmente
 ![](images/Image5.png)
+
+Ahora copiamos el codigo para los checkbox en el archivo index.html.erb
+![](images/Image6.png)
+
+Ahora empezamos editando  el codigo para que esta caracteristica de filtrado funcione  
+En el codigo de movie.rb le agregamos dos funciones de clase, la primera nos devuelve una lista con los Rating, y la segunda funcion nos devuelve las peliculas, que solo tengan el Rating del checkbox activado  
+![](images/Image7.png)
+
+En el controlador cambiaremos lo que aparece al cargar el index, en este caso primero obtendremos la lista de Rating, luego los valores que los checkbox tienen, obtenemos las llaves de el Hashmap ratings_form, que en este caso seran los checkbox que estan en True, luego de eso usando la funcion de clase Movie.with_ratings obtendremos solo las peliculas que cumplan con el filtro  
+![](images/Image8.png)
+
+Y al correr probamos y vemos que los filtros y el boton refresh ya funcionan  
+![](images/Image9.png)
