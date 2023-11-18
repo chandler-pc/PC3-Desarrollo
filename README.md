@@ -1,7 +1,6 @@
-# RottenPotatoes demo app: getting started
+# PC3
 
-This app is associated with the free [online
-course](http://www.saas-class.org) and (non-free)
-[ebook](http://www.saasbook.info) Engineering Software as a Service.
+Primero clonamos el repositorio y le damos la configuracion inicial
+![](images/Image1.png)
 
-To start working on the Rails Intro homework, please follow [the instructions](instructions/README.md).
+Ahora creamos nuestra rama en la que trabajaremos
