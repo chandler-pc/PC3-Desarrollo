@@ -36,3 +36,37 @@ En el controlador cambiaremos lo que aparece al cargar el index, en este caso pr
 
 Y al correr probamos y vemos que los filtros y el boton refresh ya funcionan  
 ![](images/Image9.png)
+
+## Más sugerencias
+
+Utilizamos el debugger para echar un vistazo lo que está dentro de params[:ratings] lo cual lo veremos en la siguiente imagen.
+
+![](images/Image10.png)
+
+Luego vamos a visualizar dentro del archivo index.html.erb lo siguiente:
+
+![](images/Image11.png)
+
+En el cual vamos a visualizar el label de div, el cual hará que el formulario funcione correctamente.
+
+Los styles, los cuale en este caso utiliza algunos estilos de Bootstrap, un ejemplo de los estilos que utiliza es `form-check form-check-inline`
+
+Continuaremos comentando la línea debugger del controlador movies_controller.rb para que no interrumpa el flujo del programa.
+
+## Pull request
+
+Continuaremos explicando el proceso de pull request, para esto debemos haber subido nuestros cambios al respositorio.
+
+![](images/Image12.png)
+
+Ahora debemos generar nuestro pull request que lo podemos hacer desde la misma página de github.
+
+![](images/Image13.png)
+
+Nos aseguramos que estamos mergeando de nuestra rama a la rama main y procedemos con el pull request.
+
+
+
+
+
+

@@ -9,6 +9,7 @@ class MoviesController < ApplicationController
   def index
     @all_ratings = Movie.all_ratings
     ratings_form = params[:ratings] || {}
+    # debugger
     @ratings_to_show = ratings_form.keys
     @movies = Movie.with_ratings(@ratings_to_show)
   end
