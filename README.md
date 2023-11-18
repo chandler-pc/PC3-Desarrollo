@@ -57,7 +57,15 @@ Continuaremos comentando la línea debugger del controlador movies_controller.rb
 
 Continuaremos explicando el proceso de pull request, para esto debemos haber subido nuestros cambios al respositorio.
 
-![](images/Image11.png)
+![](images/Image12.png)
+
+Ahora debemos generar nuestro pull request que lo podemos hacer desde la misma página de github.
+
+![](images/Image13.png)
+
+Nos aseguramos que estamos mergeando de nuestra rama a la rama main y procedemos con el pull request.
+
+
 
 
 
