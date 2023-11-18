@@ -53,3 +53,12 @@ Los styles, los cuale en este caso utiliza algunos estilos de Bootstrap, un ejem
 
 Continuaremos comentando la línea debugger del controlador movies_controller.rb para que no interrumpa el flujo del programa.
 
+## Pull request
+
+Continuaremos explicando el proceso de pull request, para esto debemos haber subido nuestros cambios al respositorio.
+
+![](images/Image11.png)
+
+
+
+
