@@ -11,13 +11,18 @@ class MoviesController < ApplicationController
     ratings_form = params[:ratings] || {}
     # debugger
     @ratings_to_show = ratings_form.keys
+    #definimos las clases de controlador que nos permitiran colorear dependiendo donde hagamos click
+    @sort_column_class_title = nil
+    @sort_column_class_date = nil
 
     #Ordenamos las peliculas
     case params[:sort]
     when 'name'
       @movies = Movie.with_ratings(@ratings_to_show).order(:title)
+      @sort_column_class_title = 'hilite p-3 mb-2 bg-warning text-dark' if params[:sort] == 'name'
     when 'date'
       @movies = Movie.with_ratings(@ratings_to_show).order(:release_date)
+      @sort_column_class_date = 'hilite p-3 mb-2 bg-warning text-dark' if params[:sort] == 'date'
     else
       @movies = Movie.with_ratings(@ratings_to_show)
     end
