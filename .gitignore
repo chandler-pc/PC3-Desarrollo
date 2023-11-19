@@ -2,3 +2,5 @@
 .idea
 
 nohup.out
+
+Gemfile.lock
