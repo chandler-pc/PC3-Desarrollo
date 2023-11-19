@@ -9,9 +9,23 @@ class MoviesController < ApplicationController
   def index
     @all_ratings = Movie.all_ratings
     ratings_form = params[:ratings] || {}
-    # debugger
     @ratings_to_show = ratings_form.keys
-    @movies = Movie.with_ratings(@ratings_to_show)
+
+    # Inicializamos las variables de instancia para las clases de columnas
+    @sort_column_class_title = nil
+    @sort_column_class_date = nil
+
+    # Ordenamos las películas
+    case params[:sort]
+    when 'name'
+      @movies = Movie.with_ratings(@ratings_to_show).order(:title)
+      @sort_column_class_title = 'hilite p-3 mb-2 bg-warning text-dark' if params[:sort] == 'name'
+    when 'date'
+      @movies = Movie.with_ratings(@ratings_to_show).order(:release_date)
+      @sort_column_class_date = 'hilite p-3 mb-2 bg-warning text-dark' if params[:sort] == 'date'
+    else
+      @movies = Movie.with_ratings(@ratings_to_show)
+    end
   end
 
   def new
