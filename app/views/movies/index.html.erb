@@ -19,9 +19,9 @@
 <table class="table table-striped col-md-12" id="movies">
   <thead>
     <tr>
-      <th>Movie Title</th>
+      <th><%= link_to "Movie Title", :sort => "name" %></th>
       <th>Rating</th>
-      <th>Release Date</th>
+      <th><%= link_to "Release Date", :sort => "date" %></th>
       <th>More Info</th>
     </tr>
   </thead>
