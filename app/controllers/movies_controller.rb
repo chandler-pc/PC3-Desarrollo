@@ -8,19 +8,33 @@ class MoviesController < ApplicationController
 
   def index
     @all_ratings = Movie.all_ratings
-    ratings_form = params[:ratings] || {}
-    @ratings_to_show = ratings_form.keys
+
+    unless request.original_url =~ /movies/
+      session.clear
+    end
+
+    if params[:ratings].nil? && params[:sort].nil? && (!session[:ratings].nil? || !session[:sort].nil?)
+      params[:ratings] = session[:ratings]
+      params[:sort] = session[:sort]
+    end
 
     # Inicializamos las variables de instancia para las clases de columnas
     @sort_column_class_title = nil
     @sort_column_class_date = nil
 
+    ratings_form = params[:ratings] || {}
+    @ratings_to_show = ratings_form.keys
+
     # Ordenamos las películas
     case params[:sort]
     when 'name'
+      session[:sort] = params[:sort]
+      session[:ratings] = params[:ratings]
       @movies = Movie.with_ratings(@ratings_to_show).order(:title)
       @sort_column_class_title = 'hilite p-3 mb-2 bg-warning text-dark' if params[:sort] == 'name'
     when 'date'
+      session[:ratings] = params[:ratings]
+      session[:sort] = params[:sort]
       @movies = Movie.with_ratings(@ratings_to_show).order(:release_date)
       @sort_column_class_date = 'hilite p-3 mb-2 bg-warning text-dark' if params[:sort] == 'date'
     else

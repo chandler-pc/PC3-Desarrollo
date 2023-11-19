@@ -141,3 +141,50 @@ Ahora recuerda las casillas marcadas y ordena todas las peliculas de rating PG
 Hace lo mismo pero ahora con 2 ratings a la vez PG-13 y R
 ![](/images/B3.png)
 
+## Parte 3: Recuerda la configuración de clasificación y filtrado
+
+Tenemos el problema de que, por ejemplo, al entrar en los detalles de una película y luego darle al botón para regresar a la lista de películas
+no nos mostrará los filtros que ya habíamos realizado.
+
+Pregunta: ¿Por qué se "olvida" la configuración de clasificación/filtrado de casillas de verificación 
+cuando navegas a la página Movie Details y luego hace clic en Back to List button?
+
+Porque crea una nueva sesión donde no tiene memoria de lo que estaba marcado anteriormente.
+
+En este caso agregamos `session[]` para gestionar las cookies. Comenzamos modificando el método index para 
+detectar si se pasó o no los params[].
+
+```ruby
+unless request.original_url =~ /movies/
+  session.clear
+end
+
+if params[:ratings].nil? && params[:sort].nil? && (!session[:ratings].nil? || !session[:sort].nil?)
+  params[:ratings] = session[:ratings]
+  params[:sort] = session[:sort]
+end
+```
+
+En este bloque de código primero limpiamos el session si no solicita el url movies.
+Luego si params[:ratings] y params[:sort] son nil y alguno de los session es diferente de nil, entonces asignamos los params 
+con los valores de las session.
+
+```ruby
+case params[:sort]
+    when 'name'
+      session[:sort] = params[:sort]
+      session[:ratings] = params[:ratings]
+      @movies = Movie.with_ratings(@ratings_to_show).order(:title)
+      @sort_column_class_title = 'hilite p-3 mb-2 bg-warning text-dark' if params[:sort] == 'name'
+    when 'date'
+      session[:ratings] = params[:ratings]
+      session[:sort] = params[:sort]
+      @movies = Movie.with_ratings(@ratings_to_show).order(:release_date)
+      @sort_column_class_date = 'hilite p-3 mb-2 bg-warning text-dark' if params[:sort] == 'date'
+    else
+      @movies = Movie.with_ratings(@ratings_to_show)
+end
+```
+
+Luego dentro del proceso de filtración y ordenamiento guardamos los params y los ratings dentro de session.
+
