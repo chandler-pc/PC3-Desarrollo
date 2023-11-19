@@ -66,7 +66,75 @@ Ahora debemos generar nuestro pull request que lo podemos hacer desde la misma p
 Nos aseguramos que estamos mergeando de nuestra rama a la rama main y procedemos con el pull request.
 
 
+## Parte 2
+## Ordenación de la lista de películas y el coloreo
+Para poder ordenar las pelñiculas en la vista index, tenemos que 
+modificar la logica de la clase controladora, de la siguiente manera
 
+```ruby
+def index
+    @all_ratings = Movie.all_ratings
+    ratings_form = params[:ratings] || {}
+    @ratings_to_show = ratings_form.keys
 
+    # Inicializamos las variables de instancia para las clases de columnas
+    @sort_column_class_title = nil
+    @sort_column_class_date = nil
 
+    # Ordenamos las películas
+    case params[:sort]
+    when 'name'
+      @movies = Movie.with_ratings(@ratings_to_show).order(:title)
+      @sort_column_class_title = 'hilite p-3 mb-2 bg-warning text-dark' if params[:sort] == 'name'
+    when 'date'
+      @movies = Movie.with_ratings(@ratings_to_show).order(:release_date)
+      @sort_column_class_date = 'hilite p-3 mb-2 bg-warning text-dark' if params[:sort] == 'date'
+    else
+      @movies = Movie.with_ratings(@ratings_to_show)
+    end
+  end
+```
+Declaramos variables de instancia dentro de la clase controladora
+las cuales iniciamos en ```nil``` para luego determinar las clases CSS
+a aplicar en los encabezados.
+
+Establecemos una estructura de control ```case``` para evaluar el parametro
+```[params:sort]```, Este parámetro generalmente se establecerá 
+cuando se haga click en el encabezado de una columna para ordenar. Si es que
+se da click al atributo ```Movie Title``` el cual esta asociado a ```name```
+gracias a Active Record podemos ordenar con su método ```order``` y 
+le pasamos por parámetro el elemento a ordenar ya sea ```:title``` o ```:release_date```
+a su vez se establece ya sea ```@sort_column_class_title``` o ```@sort_column_class_date```
+con la clase CSS correspondiente para que pueda resaltar y colorear como se indica.
+Si de lo contrario no se hace click en ninguna de las columnas
+se listara todas las peliculas que estan dentro de la base de datos.
+
+También se tuvo que hacer modificaciones dentro de la vista, en nuestro
+caso seguimos usando el formato de archivo ```hmtl.erb```
+
+```rhtml
+<tr>
+      <th><%= link_to "Movie Title", { :sort => "name", :ratings => params[:ratings] }, { :class => @sort_column_class_title } %></th>
+      <th>Rating</th>
+      <th><%= link_to "Release Date", { :sort => "date", :ratings => params[:ratings] }, { :class => @sort_column_class_date } %></th>
+      <th>More Info</th>
+    </tr>
+```
+Usamos el método helper ```link_to```, para que nos redireccione 
+a un enlace que contenga el nombre, se pasan dos parámetros 
+a la ruta especificada por el enlace.
+```:sort``` con el valor ```"name"``` indica que se está ordenando por 
+el título, y ```:ratings``` se establece con el valor de las 
+clasificaciones actuales (recuperado de params[:ratings]). 
+Esto asegura que las clasificaciones seleccionadas se conserven 
+al hacer click en el enlace. Para después se establece la clase CSS 
+del enlace. La clase se determina en el controlador.
+
+Capturas:
+
+![](/images/b1.png)
+
+![](/images/B2.png)
+
+![](/images/B3.png)
 
