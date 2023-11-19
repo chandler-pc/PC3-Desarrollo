@@ -11,7 +11,16 @@ class MoviesController < ApplicationController
     ratings_form = params[:ratings] || {}
     # debugger
     @ratings_to_show = ratings_form.keys
-    @movies = Movie.with_ratings(@ratings_to_show)
+
+    #Ordenamos las peliculas
+    case params[:sort]
+    when 'name'
+      @movies = Movie.with_ratings(@ratings_to_show).order(:title)
+    when 'date'
+      @movies = Movie.with_ratings(@ratings_to_show).order(:release_date)
+    else
+      @movies = Movie.with_ratings(@ratings_to_show)
+    end
   end
 
   def new
