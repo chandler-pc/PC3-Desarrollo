@@ -132,9 +132,12 @@ del enlace. La clase se determina en el controlador.
 
 Capturas:
 
+Ordena de manera alfabética y colorea
 ![](/images/b1.png)
 
+Ahora recuerda las casillas marcadas y ordena todas las peliculas de rating PG
 ![](/images/B2.png)
 
+Hace lo miso pero ahora con 2 ratings a la vez PG-13 y R
 ![](/images/B3.png)
 
