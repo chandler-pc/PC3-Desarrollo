@@ -9,13 +9,13 @@ class MoviesController < ApplicationController
   def index
     @all_ratings = Movie.all_ratings
     ratings_form = params[:ratings] || {}
-    # debugger
     @ratings_to_show = ratings_form.keys
-    #definimos las clases de controlador que nos permitiran colorear dependiendo donde hagamos click
+
+    # Inicializamos las variables de instancia para las clases de columnas
     @sort_column_class_title = nil
     @sort_column_class_date = nil
 
-    #Ordenamos las peliculas
+    # Ordenamos las películas
     case params[:sort]
     when 'name'
       @movies = Movie.with_ratings(@ratings_to_show).order(:title)
