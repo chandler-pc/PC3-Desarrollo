@@ -19,9 +19,12 @@
 <table class="table table-striped col-md-12" id="movies">
   <thead>
     <tr>
-      <th><%= link_to "Movie Title", :sort => "name" %></th>
+      <th>
+        <%= link_to "Movie Title", { :sort => "name", :class => (params[:sort] == 'name') ? 'hilite p-3 mb-2 bg-warning text-dark' : nil } %>
+      </th>
+
       <th>Rating</th>
-      <th><%= link_to "Release Date", :sort => "date" %></th>
+      <th><%= link_to "Release Date", { :sort => "date" }, { :class => (params[:sort] == 'date') ? 'hilite' : nil } %></th>
       <th>More Info</th>
     </tr>
   </thead>
