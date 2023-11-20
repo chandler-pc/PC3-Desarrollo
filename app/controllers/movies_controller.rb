@@ -23,6 +23,7 @@ class MoviesController < ApplicationController
     @sort_column_class_date = nil
 
     ratings_form = params[:ratings] || {}
+    debugger
     @ratings_to_show = ratings_form.keys
 
     # Ordenamos las películas
