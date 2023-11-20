@@ -1,4 +1,11 @@
 # PC3
+## Integrantes:
+- José Fabricio Bustos Ttito
+- Chandler Steven Pérez Cueva
+- Christian Daniel Poma Navarro
+### Link del video (Exposición)
+https://drive.google.com/file/d/15RuwgxIAUUMaJvldthdAS1El2UPLxY-T/view?usp=sharing
+
 
 Primero clonamos el repositorio y le damos la configuracion inicial
 ![](images/Image1.png)
